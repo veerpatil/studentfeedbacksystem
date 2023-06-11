@@ -2,17 +2,20 @@ package org.feedback.entity;
 
 
 import javax.persistence.*;
+import javax.print.attribute.standard.MediaSize;
 
 @Entity
 public class UserInfoMaster {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USERID")
     public Long userid;
 
+    @Column(name = "USERNAME")
    public String userName;
 
+    @Column(name = "PASSWORD")
    public String Password;
 
 

@@ -1,6 +1,7 @@
 package org.feedback.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Parameters;
 import org.feedback.entity.UserInfoMaster;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -36,6 +37,22 @@ public class UserInfoRepository implements PanacheRepository<UserInfoMaster> {
         List<UserInfoMaster> userInfoMasters = findAll().list();
 
         return  userInfoMasters.stream().toList();
+    }
+
+
+
+    @Transactional
+    public boolean deleteUserInfo(long id)
+    {
+       return deleteById(id);
+    }
+
+    @Transactional
+
+    public long deleteUser(String userName)
+    {
+        long id= delete("Delete from UserInfoMaster where USERNAME=:userName", Parameters.with("userName",userName));
+        return  id;
     }
 
 }
