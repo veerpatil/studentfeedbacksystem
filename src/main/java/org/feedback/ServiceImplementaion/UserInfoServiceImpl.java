@@ -83,5 +83,22 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoRepository.deleteUser(userName);
     }
 
+    @Override
+    public List<UserResponse> getAllUsersByNameID(String userName, Long Id) {
+
+        List<UserResponse> users = new ArrayList<>();
+
+        List<UserInfoMaster> userInfoMasters = userInfoRepository.getAllUsers(userName,Id);
+
+        for (UserInfoMaster user : userInfoMasters
+        ) {
+            UserResponse userResponse = new UserResponse();
+            userResponse.setUserID(user.getUserid());
+            userResponse.setUserName(user.getUserName());
+            users.add(userResponse);
+        }
+
+        return users;
+    }
 
 }

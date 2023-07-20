@@ -6,7 +6,10 @@ import org.feedback.entity.UserInfoMaster;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class to That holds method to perform crud operations
@@ -54,5 +57,23 @@ public class UserInfoRepository implements PanacheRepository<UserInfoMaster> {
         long id= delete("Delete from UserInfoMaster where USERNAME=:userName", Parameters.with("userName",userName));
         return  id;
     }
+
+
+    public List<UserInfoMaster> getAllUsers(String userName, Long id) {
+        List<UserInfoMaster> userInfoMaster = null;
+        if(userName != "" && id!=0)
+        {
+             userInfoMaster = find("USERNAME= ?1 AND USERID= ?2",userName,id).list();
+        }
+        else if (userName!="")
+        {
+            userInfoMaster = find("USERNAME= ?1",userName).list();
+        } else if (id!=0) {
+            userInfoMaster = find("USERID= ?1",id).list();
+        }
+
+        return userInfoMaster.stream().toList();
+    }
+
 
 }

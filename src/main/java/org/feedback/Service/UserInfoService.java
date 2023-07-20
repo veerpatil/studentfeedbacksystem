@@ -19,4 +19,6 @@ public interface UserInfoService {
 
     long DeleteUser(String userName);
 
+    List<UserResponse> getAllUsersByNameID(String userName, Long Id);
+
 }
